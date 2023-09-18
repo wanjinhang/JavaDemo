@@ -18,8 +18,13 @@ public class Architect extends Designer{
     private int stock;//股份
 
 
-    public Architect(int id, String name, int age, double salary, double bonus, int stock) {
-        super(id, name, age, salary, bonus);
+    public Architect(int id, String name, int age, double salary, Equipment equipment, double bonus, int stock) {
+        super(id, name, age, salary, equipment, bonus);
+        this.stock = stock;
+    }
+
+    public Architect(double bonus, int stock) {
+        super(bonus);
         this.stock = stock;
     }
 

@@ -6,18 +6,25 @@ package com.example.team.service;
  * @date 2023/9/16 20:23
  */
 public enum Status {
-    FREE("空闲"),
-    BUSY("已加入开发团队"),
-    VOCATION("正在休假");
+    FREE("FREE","空闲"),
+    BUSY("BUSY","已加入开发团队"),
+    VOCATION("VOCATION","正在休假");
+    private final String name;
+    private final String description;
 
-    private final String status;
-
-    Status(String status) {
-        this.status = status;
+    public String getDescription() {
+        return description;
     }
 
-    public String getStatus() {
-        return status;
+    public String getName() {
+        return name;
     }
+
+
+    Status(String name,String description) {
+        this.name = name;
+        this.description = description;
+    }
+
 
 }

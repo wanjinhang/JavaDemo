@@ -13,11 +13,15 @@ package com.example.team.domain;/**
  * @date: 2023/9/16 20:34
  * @version: 1.0
  */
-public class Designer extends Employee{
+public class Designer extends Programmer {
     private double bonus;//奖金
 
-    public Designer(int id, String name, int age, double salary, double bonus) {
-        super(id, name, age, salary);
+    public Designer(int id, String name, int age, double salary, Equipment equipment, double bonus) {
+        super(id, name, age, salary, equipment);
+        this.bonus = bonus;
+    }
+
+    public Designer(double bonus) {
         this.bonus = bonus;
     }
 
