@@ -46,10 +46,11 @@ public class TeamService {
         for (int i = 0; i <total ; i++) {
             if(team[i] instanceof Architect){
                 numOfArchives++;
-            }else if (team[i] instanceof Programmer){
-                numOfProgrammer++;
             }else if (team[i] instanceof Designer){
                 numOfDesigner++;
+            }else{
+
+                numOfProgrammer++;
             }
         }
         if(p instanceof Architect){
@@ -60,7 +61,7 @@ public class TeamService {
             if (numOfDesigner>=2){
                 throw new TeamException("团队中至多只能有二名设计师");
             }
-        }else if (p instanceof Programmer){
+        }else{
             if(numOfProgrammer>=3){
                 throw new TeamException("团队中至多只能有三名程序员");
             }
