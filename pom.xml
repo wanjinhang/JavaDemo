@@ -10,6 +10,7 @@
     <name>demo</name>
     <modules>
         <module>TeamSchedule</module>
+        <module>ThreadDemo</module>
     </modules>
     <packaging>pom</packaging>
 
