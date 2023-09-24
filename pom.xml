@@ -11,6 +11,7 @@
     <modules>
         <module>TeamSchedule</module>
         <module>ThreadDemo</module>
+        <module>JavaTest</module>
     </modules>
     <packaging>pom</packaging>
 
