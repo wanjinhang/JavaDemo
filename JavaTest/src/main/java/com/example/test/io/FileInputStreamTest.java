@@ -3,6 +3,7 @@ package com.example.test.io;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.*;
 
 /**
  * @author wansui
@@ -83,9 +84,10 @@ public class FileInputStreamTest {
 
 
     }
+
     //字节流  复制文件
     @Test
-    public void test3(){
+    public void test3() {
         FileInputStream fis = null;
         FileOutputStream fos = null;
 
@@ -93,13 +95,13 @@ public class FileInputStreamTest {
         File file2 = new File("abc-stream.txt");
 
         try {
-            fis  = new FileInputStream(file1);
+            fis = new FileInputStream(file1);
             fos = new FileOutputStream(file2);
 
             byte[] buff = new byte[1024];
             int len;
-            while ((len = fis.read(buff)) !=-1){
-                fos.write(buff,0,len);
+            while ((len = fis.read(buff)) != -1) {
+                fos.write(buff, 0, len);
             }
             System.out.println("复制成功！");
         } catch (FileNotFoundException e) {
@@ -107,7 +109,7 @@ public class FileInputStreamTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
-            if(fos != null){
+            if (fos != null) {
                 try {
                     fos.close();
                 } catch (IOException e) {
@@ -115,13 +117,100 @@ public class FileInputStreamTest {
                 }
             }
 
-            if(fis !=null){
+            if (fis != null) {
                 try {
                     fis.close();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
+        }
+
+    }
+
+    //字符缓冲流
+
+    @Test
+    public void test4() {
+        //创建文件对象
+        File file1 = new File("abc.txt");
+        File file2 = new File("abc-bufferd.txt");
+        //创建字符流
+        FileReader fileReader = null;
+        FileWriter fileWriter = null;
+        BufferedReader bufferedReader =null;
+        BufferedWriter bufferedWriter =null;
+        try {
+            fileReader = new FileReader(file1);
+            fileWriter = new FileWriter(file2);
+
+            bufferedReader = new BufferedReader(fileReader);
+            bufferedWriter = new BufferedWriter(fileWriter);
+            char[] cbuf = new char[5];
+            int len ;
+            while ((len = bufferedReader.read(cbuf)) != -1) {
+                    bufferedWriter.write(cbuf,0,len);
+            }
+            System.out.println("复制成功");
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }finally {
+            if(bufferedWriter != null){
+                try {
+                    bufferedWriter.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+
+            if (bufferedReader != null){
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+
+    //姓氏统计：一个文本文件中存储着北京所有高校在校生的姓名，格式如下：
+    @Test
+    public void test5(){
+        //创建文件对象
+        File file1 = new File("namelist.txt");
+        FileReader fileReader = null;
+        BufferedReader br = null;
+        HashMap<Character, Integer> nameMap = new HashMap<>();
+        HashSet<Character> chars = new HashSet<>();
+        ArrayList<Character> nameList = new ArrayList<>();
+        try{
+            fileReader = new FileReader(file1);
+            br = new BufferedReader(fileReader);
+            String string;
+            while ((string = br.readLine()) != null){
+                char lastName = string.toCharArray()[0];
+                nameList.add(lastName);
+                chars.add(lastName);
+                boolean b = nameMap.containsKey(lastName);
+                if(!b){
+                    nameMap.put(lastName,1);
+                }else{
+                    int num = nameMap.get(lastName) +1;
+                    nameMap.put(lastName,num);
+                }
+            }
+            Set<Map.Entry<Character, Integer>> entries = nameMap.entrySet();
+            for (Map.Entry<Character, Integer> entrySet : entries){
+                System.out.println(entrySet.getKey()+"->"+entrySet.getValue());
+           }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
     }
